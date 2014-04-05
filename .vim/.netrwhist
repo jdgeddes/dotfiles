@@ -1,5 +1,0 @@
-let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =3
-let g:netrw_dirhist_1='/storage/Downloads/xgoogle/programs'
-let g:netrw_dirhist_2='/home/john/research/prioritized'
-let g:netrw_dirhist_3='/usr/share/doc/python-pypcap/examples'
