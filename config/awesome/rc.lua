@@ -764,3 +764,5 @@ end
 -- }}}
 
 require_safe('autorun')
+
+os.execute("nm-applet &")
