@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-import os,shutil,sys
+import os,shutil,sys,subprocess
 
 IGNORE = ['install.py', 'tags', 'backup', '.git', '.gitignore']
 
@@ -45,6 +45,20 @@ def main():
             if homefile_exists:
                 copyfile(homefilename, backupfilename)
             copyfile(dotfilename, homefilename)
+
+    if not os.path.exists('/home/john/.oh-my-zsh'):
+        cmd = 'git clone https://github.com/robbyrussell/oh-my-zsh /home/john/.oh-my-zsh'
+        p = subprocess.Popen(cmd.split(' '), stdout=subprocess.PIPE)
+        output = p.communicate()[0] 
+    else:
+        cmd = 'git pull'
+        p = subprocess.Popen(cmd.split(' '), cwd='/home/john/.oh-my-zsh', stdout=subprocess.PIPE)
+        output = p.communicate()[0] 
+
+    cmd = 'cp af-magic.zsh-theme /home/john/.oh-my-zsh/themes/'
+    p = subprocess.Popen(cmd.split(' '))
+
+
 
 
 if __name__ == '__main__':
