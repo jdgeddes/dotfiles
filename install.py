@@ -2,7 +2,7 @@
 
 import os,shutil,sys,subprocess
 
-IGNORE = ['install.py', 'tags', 'backup', '.git', '.gitignore']
+IGNORE = ['install.py', 'tags', 'backup', '.git', '.gitignore', 'af-magic.zsh-theme']
 
 CURRENTDIR = os.path.abspath(os.getcwd())
 HOMEDIR = os.path.expanduser('~')
@@ -46,16 +46,18 @@ def main():
                 copyfile(homefilename, backupfilename)
             copyfile(dotfilename, homefilename)
 
-    if not os.path.exists('/home/john/.oh-my-zsh'):
-        cmd = 'git clone https://github.com/robbyrussell/oh-my-zsh /home/john/.oh-my-zsh'
+    zshPath = os.path.expanduser('~/.oh-my-zsh')
+
+    if not os.path.exists(zshPath):
+        cmd = 'git clone https://github.com/robbyrussell/oh-my-zsh {0}'.format(zshPath)
         p = subprocess.Popen(cmd.split(' '), stdout=subprocess.PIPE)
         output = p.communicate()[0] 
     else:
         cmd = 'git pull'
-        p = subprocess.Popen(cmd.split(' '), cwd='/home/john/.oh-my-zsh', stdout=subprocess.PIPE)
+        p = subprocess.Popen(cmd.split(' '), cwd=zshPath, stdout=subprocess.PIPE)
         output = p.communicate()[0] 
 
-    cmd = 'cp af-magic.zsh-theme /home/john/.oh-my-zsh/themes/'
+    cmd = 'cp af-magic.zsh-theme {0}'.format(os.path.join(zshPath, 'themes'))
     p = subprocess.Popen(cmd.split(' '))
 
 
